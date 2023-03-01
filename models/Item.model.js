@@ -12,9 +12,8 @@ const itemSchema = new Schema({
     imageUrl: 
     {
         type: String,
-        required: true
     },
-    state: String,
+    condition: String,
     treasure: {
         type: Schema.Types.ObjectId,
         ref: "Treasure"
