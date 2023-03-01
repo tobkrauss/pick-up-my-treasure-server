@@ -20,6 +20,12 @@ require("./config")(app);
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
+const treasureRouter = require("./routes/treasure.routes");
+app.use("/api", isAuthenticated, treasureRouter);
+
+const itemRouter = require("./routes/item.routes");
+app.use("/api", isAuthenticated, itemRouter);
+
 const authRouter = require("./routes/auth.routes")
 app.use("/auth", authRouter)
 

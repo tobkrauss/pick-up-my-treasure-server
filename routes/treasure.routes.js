@@ -6,7 +6,7 @@ const Treasure = require("../models/Treasure.model");
 const Item = require("../models/Item.model");
 
 //  POST /api/treasure  -  Creates a new treasure
-router.post("/treasure", (req, res, next) => {
+router.post("/new-treasure", (req, res, next) => {
   const { owner, title, description, imageUrl, street, zipcode, city } = req.body;
 
   Treasure.create({ owner, title, description, imageUrl, street, zipcode, city, items: [] })
