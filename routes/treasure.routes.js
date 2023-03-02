@@ -2,8 +2,21 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
+const {uploader} = require("../config/cloudinary");
 const Treasure = require("../models/Treasure.model");
 const Item = require("../models/Item.model");
+
+
+router.post("/upload", uploader.single("imageUrl"), (req, res, next) => {
+ 
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  
+  res.json({ imageUrl: req.file.path });
+});
+
 
 //  POST /api/treasure  -  Creates a new treasure
 router.post("/new-treasure", (req, res, next) => {
