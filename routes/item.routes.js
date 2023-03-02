@@ -19,6 +19,20 @@ router.post("/items", (req, res, next) => {
         .catch((err) => res.json(err));
 });
 
+//  GET /api/items/:itemId -  Retrieves a specific Item by id
+router.get("/items/:itemId", (req, res, next) => {
+    const { itemId } = req.params;
+  
+    if (!mongoose.Types.ObjectId.isValid(itemId)) {
+      res.status(400).json({ message: "Specified id is not valid" });
+      return;
+    }
+  
+    Item.findById(itemId)
+      .then((item) => res.status(200).json(item))
+      .catch((error) => res.json(error));
+  });
+  
 
 // PUT  /api/items/:itemId  -  Updates a specific item by id
 router.put("/items/:itemId", (req, res, next) => {
