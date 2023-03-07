@@ -2,29 +2,28 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const {uploader} = require("../config/cloudinary");
+const { uploader } = require("../config/cloudinary");
 const Treasure = require("../models/Treasure.model");
-const Item = require("../models/Item.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 
 router.post("/upload", uploader.single("imageUrl"), (req, res, next) => {
- 
+
   if (!req.file) {
     next(new Error("No file uploaded!"));
     return;
   }
-  
+
   res.json({ imageUrl: req.file.path });
 });
 
 
 //  POST /api/treasure  -  Creates a new treasure
 router.post("/new-treasure", (req, res, next) => {
-  const { owner, title, description, imageUrl, street, zipcode, city } = req.body;
+  const { owner, title, description, imageUrl, street, zipcode, city, user } = req.body;
 
-  Treasure.create({ owner, title, description, imageUrl, street, zipcode, city, items: [] })
-    .then((response) => res.json(response))
+  Treasure.create({ owner, title, description, imageUrl, street, zipcode, city, user, items: [] })
+    .then((response)=> res.json(response))
     .catch((err) => res.json(err));
 });
 

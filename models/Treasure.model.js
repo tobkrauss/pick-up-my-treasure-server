@@ -29,6 +29,11 @@ const treasureSchema = new Schema({
         type: String,
         required: true
     },
+    user: 
+    {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
 
     items: [{
         type: Schema.Types.ObjectId,

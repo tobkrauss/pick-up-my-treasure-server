@@ -14,6 +14,10 @@ const itemSchema = new Schema({
         type: String,
     },
     condition: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
     treasure: {
         type: Schema.Types.ObjectId,
         ref: "Treasure"

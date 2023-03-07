@@ -20,8 +20,8 @@ router.post("/upload", uploader.single("imageUrl"), (req, res, next) => {
 
 //  POST /api/items  -  Creates a new item
 router.post("/items", (req, res, next) => {
-    const { title, description, category, imageUrl, condition, treasureId } = req.body;
-    Item.create({ title, description, category, imageUrl, condition, treasure: treasureId })
+    const { title, description, category, imageUrl, condition, user, treasureId } = req.body;
+    Item.create({ title, description, category, imageUrl, condition, user, treasure: treasureId })
         .then((newItem) => {
             console.log("new item is", newItem)
             return Treasure.findByIdAndUpdate(treasureId, {
