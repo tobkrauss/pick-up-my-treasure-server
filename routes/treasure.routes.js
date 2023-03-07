@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const {uploader} = require("../config/cloudinary");
 const Treasure = require("../models/Treasure.model");
 const Item = require("../models/Item.model");
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 
 router.post("/upload", uploader.single("imageUrl"), (req, res, next) => {
@@ -36,7 +37,7 @@ router.get("/treasure", (req, res, next) => {
 });
 
 //  GET /api/treasure/:treasureId -  Retrieves a specific treasure by id
-router.get("/treasure/:treasureId", (req, res, next) => {
+router.get("/treasure/:treasureId", isAuthenticated, (req, res, next) => {
   const { treasureId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(treasureId)) {
@@ -53,7 +54,7 @@ router.get("/treasure/:treasureId", (req, res, next) => {
 });
 
 // PUT  /api/treasure/:treasureId  -  Updates a specific treasure by id
-router.put("/treasure/:treasureId", (req, res, next) => {
+router.put("/treasure/:treasureId", isAuthenticated, (req, res, next) => {
   const { treasureId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(treasureId)) {
@@ -67,7 +68,7 @@ router.put("/treasure/:treasureId", (req, res, next) => {
 });
 
 // DELETE  /api/treasure/:treasureId  -  Deletes a specific treasure by id
-router.delete("/treasure/:treasureId", (req, res, next) => {
+router.delete("/treasure/:treasureId", isAuthenticated, (req, res, next) => {
   const { treasureId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(treasureId)) {

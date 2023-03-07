@@ -21,7 +21,7 @@ const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
 const treasureRouter = require("./routes/treasure.routes");
-app.use("/api", isAuthenticated, treasureRouter);
+app.use("/api", treasureRouter);
 
 const itemRouter = require("./routes/item.routes");
 app.use("/api", isAuthenticated, itemRouter);
